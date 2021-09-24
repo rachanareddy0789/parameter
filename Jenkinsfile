@@ -1,5 +1,5 @@
 pipeline {
-	agent { label 'master' }
+ 
 	stages {
 		stage('BUILD') {
 			parallel {
