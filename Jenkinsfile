@@ -1,13 +1,13 @@
 pipeline {
 	agent { label 'master' }
-	triggers {
-		cron('H/15 * * * *')
-	}	
+	parameters {
+		string(name: 'NAME', description: 'Enter your name here')
+	}
 	stages {
 		stage('BUILD') {
 			steps {
-				sh 'echo this is my first stage in pipeline job'
-				sh 'ls -lrt'
+				echo "NAME ${params.NAME}"
+				sh "echo ${params.NAME}"
 				sh 'sleep 5'
 			}	
 		}	
