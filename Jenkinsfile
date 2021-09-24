@@ -1,5 +1,5 @@
 pipeline {
-	agent any
+	agent { label 'master' }
 	triggers {
 		cron('H/15 * * * *')
 	}	
@@ -12,7 +12,6 @@ pipeline {
 			}	
 		}	
 		stage('TEST') {
-			agent any
 			steps {
 				sh ''' 
 					sleep 5
@@ -22,7 +21,6 @@ pipeline {
 		}
 		
 		stage('DEPLOY') {
-			agent any
 			steps {
 				sh ''' 
 					sleep 5
@@ -30,5 +28,5 @@ pipeline {
 				   '''
 			}
 		}
-}
+	}
 }
