@@ -1,26 +1,18 @@
 pipeline {
 	agent any
+	triggers {
+		cron('H/15 * * * *')
+	}	
 	stages {
 		stage('BUILD') {
-			parallel {
-				stage('BUILD1') {
-					steps {
-						sh 'echo this is my first stage in pipeline job'
-						sh 'ls -lrt'
-						sh 'sleep 5'
-					}
-				}
-				
-				stage('BUILD2') {
-					steps {
-						sh 'echo this is my first stage in pipeline job'
-						sh 'ls -lrt'
-						sh 'sleep 5'
-					}
-				}
-			}
+			steps {
+				sh 'echo this is my first stage in pipeline job'
+				sh 'ls -lrt'
+				sh 'sleep 5'
+			}	
 		}	
 		stage('TEST') {
+			agent any
 			steps {
 				sh ''' 
 					sleep 5
@@ -30,6 +22,7 @@ pipeline {
 		}
 		
 		stage('DEPLOY') {
+			agent any
 			steps {
 				sh ''' 
 					sleep 5
