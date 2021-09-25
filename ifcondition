@@ -1,21 +1,23 @@
 pipeline {
-  agent any
-  parameters {
-    choice(name: 'DENV', choices: ['TEST','QA','PROD'], description: 'Enter environment to deploy')
-  }
-  stages {
-    stage('BUILD'){
-      
-    steps {
-      def br_name = "${params.DEV}"
-      if (br_name == "TEST") {
-        echo "deploying to TEST environment"
-      }else if (br_name == "QA") {
-        echo "deploying to QA environment"
-      }else if (br_name == "PROD") {
-        echo "deploying to PROD environment"
+    agent any
+      parameters {
+        choice(name: 'DENV', choices: ['TEST','QA','PROD'], description: 'Enter environment to deploy')
       }
-    }
-}
-}
+    stages {
+      stage('BUILD'){ 
+            environment {
+                  STAGE_NAME = 'build'
+                }
+          steps {
+            def br_name = "${params.DEV}"
+              if (br_name == "TEST") {
+                echo "deploying to TEST environment"
+              }else if (br_name == "QA") {
+                echo "deploying to QA environment"
+              }else if (br_name == "PROD") {
+                echo "deploying to PROD environment"
+              }
+          }
+      }
+   }
 }
