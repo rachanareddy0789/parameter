@@ -5,9 +5,7 @@ pipeline {
   }
   stages {
     stage('BUILD'){
-      environment {
-        STAGE_NAME = 'build'
-    }
+      
     steps {
       def br_name = "${params.DEV}"
       if (br_name == "TEST") {
