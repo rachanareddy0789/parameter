@@ -4,10 +4,7 @@ pipeline {
         choice(name: 'DENV', choices: ['TEST','QA','PROD'], description: 'Enter environment to deploy')
       }
     stages {
-      stage('BUILD'){ 
-            environment {
-                  STAGE_NAME = 'build'
-                }
+      stage('BUILD'){             
           steps {
             def br_name = "${params.DENV}"
               if (br_name == "TEST") {
